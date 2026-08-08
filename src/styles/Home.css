@@ -1,0 +1,380 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.home {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── Floating orbs background ── */
+.home::before,
+.home::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: orbFloat 8s ease-in-out infinite alternate;
+}
+.home::before {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(212,175,55,0.18) 0%, transparent 70%);
+  top: -100px;
+  left: -150px;
+  animation-delay: 0s;
+}
+.home::after {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+  bottom: -80px;
+  right: -100px;
+  animation-delay: -4s;
+}
+
+@keyframes orbFloat {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, 30px) scale(1.1); }
+}
+
+/* ── Floating particle dots ── */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.6);
+  animation: particleDrift linear infinite;
+}
+.particle:nth-child(odd)  { background: rgba(255, 255, 255, 0.25); }
+.particle:nth-child(3n)   { width: 3px; height: 3px; }
+.particle:nth-child(5n)   { width: 1px; height: 1px; }
+
+@keyframes particleDrift {
+  0%   { transform: translateY(100vh) translateX(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-50px) translateX(var(--drift, 30px)); opacity: 0; }
+}
+
+/* ── Ferrofluid canvas layer ── */
+.ferrofluid-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+
+/* ── Glass card ── */
+.glass {
+  position: relative;
+  z-index: 2;
+  width: 680px;
+  padding: 64px 56px 52px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px;
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.06),
+    0 32px 80px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  animation: cardEntrance 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.glass:hover {
+  transform: translateY(-8px) scale(1.005);
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.14),
+    0 48px 100px rgba(0, 0, 0, 0.7),
+    0 0 60px rgba(212, 175, 55, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(40px) scale(0.92); }
+  to   { opacity: 1; transform: translateY(0)  scale(1); }
+}
+
+/* ── Top badge ── */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 50px;
+  padding: 6px 18px;
+  margin-bottom: 32px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #d4af37;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  animation: badgeFade 0.8s 0.3s ease both;
+  transition: background 0.3s, border-color 0.3s;
+}
+.status-badge:hover {
+  background: rgba(212, 175, 55, 0.18);
+  border-color: rgba(212, 175, 55, 0.55);
+}
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d4af37;
+  box-shadow: 0 0 8px #d4af37;
+  animation: pulseDot 1.8s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+@keyframes badgeFade {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Profile image ── */
+.savi-profile-home {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  animation: profileEntrance 0.8s 0.1s ease both;
+  transition: transform 0.4s ease;
+}
+.savi-profile-home::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #d4af37, #fff7e0, #d4af37, #a07c20, #d4af37);
+  z-index: -1;
+  animation: spinRing 4s linear infinite;
+}
+.savi-profile-home::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: conic-gradient(from 180deg, rgba(212,175,55,0.3), transparent, rgba(212,175,55,0.3));
+  z-index: -2;
+  animation: spinRing 6s linear infinite reverse;
+  filter: blur(4px);
+}
+.savi-profile-home:hover {
+  transform: scale(1.07);
+}
+.savi-profile-home img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #000;
+  display: block;
+}
+@keyframes spinRing {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes profileEntrance {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Headings ── */
+.glass-greeting {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  animation: fadeUp 0.7s 0.35s ease both;
+}
+
+.glass-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 64px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #ffffff 0%, #d4af37 50%, #fff7d6 80%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: shimmerText 3s ease-in-out infinite, fadeUp 0.7s 0.4s ease both;
+}
+@keyframes shimmerText {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.glass-tagline {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.3px;
+  margin-bottom: 0;
+  animation: fadeUp 0.7s 0.5s ease both;
+}
+
+/* ── Feature pills ── */
+.features-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 28px 0 36px;
+  animation: fadeUp 0.7s 0.55s ease both;
+}
+.feature-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  padding: 7px 16px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+.feature-pill:hover {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: rgba(212, 175, 55, 0.4);
+  color: #d4af37;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.12);
+}
+.feature-pill .pill-icon {
+  font-size: 14px;
+}
+
+/* ── Divider ── */
+.glass-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
+  margin: 0 auto 36px;
+  animation: fadeUp 0.7s 0.6s ease both;
+}
+
+/* ── Buttons ── */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  animation: fadeUp 0.7s 0.65s ease both;
+}
+
+/* ── Start button glow wrapper ── */
+.start-btn-glow {
+  position: relative;
+  display: inline-block;
+}
+.start-btn-glow::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #d4af37, #a07c20, #d4af37);
+  opacity: 0;
+  filter: blur(12px);
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+.start-btn-glow:hover::before {
+  opacity: 0.7;
+}
+
+/* ── Team tag ── */
+.team {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  animation: fadeUp 0.7s 0.75s ease both;
+}
+.team-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  cursor: default;
+}
+.team-inner:hover { color: rgba(212, 175, 55, 0.7); }
+.team-line {
+  width: 30px;
+  height: 1px;
+  background: rgba(255,255,255,0.12);
+  transition: background 0.3s;
+}
+.team-inner:hover ~ .team-line,
+.team-line:first-child { }
+
+/* ── Scrolling shine on card border ── */
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 32px;
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.08) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(212,175,55,0.04) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 720px) {
+  .glass {
+    width: 92vw;
+    padding: 48px 28px 40px;
+  }
+  .glass-name { font-size: 44px; }
+}

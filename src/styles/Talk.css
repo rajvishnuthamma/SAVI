@@ -1,0 +1,54 @@
+.talk-container {
+
+height:100vh;
+
+background:#020617;
+
+color:white;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+}
+
+
+.talk-container h1 {
+
+font-size:50px;
+
+color:#00d9ff;
+
+}
+
+
+.talk-container button {
+
+padding:18px 40px;
+
+border:none;
+
+border-radius:30px;
+
+background:#00d9ff;
+
+font-size:20px;
+
+cursor:pointer;
+
+}
+
+
+.talk-container p {
+
+font-size:20px;
+
+max-width:600px;
+
+}
