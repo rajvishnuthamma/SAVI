@@ -20,6 +20,7 @@ export default function Chat() {
 
   const [menuOpenId, setMenuOpenId] = useState(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // Load history on mount
   useEffect(() => {
@@ -292,7 +293,7 @@ export default function Chat() {
       />
 
       {/* Sidebar */}
-      <div className="chatSidebar">
+      <div className={`chatSidebar ${mobileSidebarOpen ? 'open' : ''}`}>
         <div className="sidebarHeader">
           <div className="saviLogo">
             <img src="/savi_profile.png" alt="Savi" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -310,7 +311,7 @@ export default function Chat() {
             <div 
               key={session.id}
               className={`recentChat ${session.id === activeSessionId ? 'active' : ''}`}
-              onClick={() => setActiveSessionId(session.id)}
+              onClick={() => { setActiveSessionId(session.id); setMobileSidebarOpen(false); }}
             >
               <div className="chatTitle">{session.title || "Chat"}</div>
               <button 
@@ -343,6 +344,7 @@ export default function Chat() {
       {/* Main Area */}
       <div className="mainChat">
         <div className="mainHeader">
+          <button className="mobileMenuBtn" onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}>☰</button>
           Savi
           <div className="onlineDot"></div>
           <span style={{ fontSize: '12px', color: '#00e676', fontWeight: '500', letterSpacing: '0.5px' }}>Online</span>

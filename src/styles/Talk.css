@@ -52,3 +52,30 @@ font-size:20px;
 max-width:600px;
 
 }
+
+@media (max-width: 768px) {
+  .talk-container {
+    padding: 20px;
+  }
+  .talk-container h1 {
+    font-size: 36px;
+  }
+  .talk-container button {
+    padding: 14px 30px;
+    font-size: 18px;
+  }
+  .talk-container p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .talk-container h1 {
+    font-size: 28px;
+  }
+  .talk-container button {
+    padding: 12px 24px;
+    font-size: 16px;
+    width: 100%;
+  }
+}

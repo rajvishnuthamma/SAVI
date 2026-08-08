@@ -63,3 +63,34 @@ border-radius:25px;
 cursor:pointer;
 
 }
+
+@media (max-width: 768px) {
+  .result h1 {
+    font-size: 32px;
+  }
+  .btns button {
+    padding: 12px 30px;
+    font-size: 16px;
+    margin: 10px;
+  }
+  .homeBtn {
+    padding: 10px 25px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .result h1 {
+    font-size: 26px;
+  }
+  .btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px;
+  }
+  .btns button {
+    margin: 0;
+    width: 100%;
+  }
+}
